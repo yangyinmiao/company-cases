@@ -22,7 +22,7 @@ const FEATURED = {
   metrics: [
     { val: '97.3%', lbl: '语音识别准确率' },
     { val: '3x',    lbl: '会议整理效率提升' },
-    { val: '<2s',   lbl: '实时转写改为批量异步转写' },
+    { lbl: '异步转写' },
     { val: '中英日',    lbl: '支持语种' },
   ],
   icon: '🎙️',
@@ -150,7 +150,7 @@ const CASES = [
     ],
     tags: ['WireGuard', '访问审计'],
     metrics: [
-      { val: '500+',  lbl: '用户接入' },
+      { val: '50+',  lbl: '用户接入' },
       { val: '99.9%', lbl: '服务可用性' },
       { val: '0',     lbl: '安全事件' },
     ],
