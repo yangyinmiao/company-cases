@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>客户案例 · 技术服务能力展示</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f7fa;
+    color: #1a1a2e;
+  }
+
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #0a2540 0%, #1a4080 60%, #0d6efd 100%);
+    color: white;
+    padding: 80px 0 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 600px;
+    height: 600px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .header-inner { position: relative; z-index: 1; }
+  .company-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  .header p {
+    font-size: 16px;
+    opacity: 0.8;
+    max-width: 500px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-size: 36px;
+    font-weight: 700;
+    display: block;
+  }
+  .stat-label {
+    font-size: 13px;
+    opacity: 0.7;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* Filter bar */
+  .filter-bar {
+    background: white;
+    border-bottom: 1px solid #e8ecf0;
+    padding: 0 60px;
+    display: flex;
+    gap: 0;
+  }
+  .filter-btn {
+    padding: 18px 24px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .filter-btn.active {
+    color: #0d6efd;
+    border-bottom-color: #0d6efd;
+    font-weight: 600;
+  }
+
+  /* Main */
+  .main { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0d6efd;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section-heading {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0a2540;
+    margin-bottom: 48px;
+  }
+
+  /* Case cards grid */
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 28px;
+    margin-bottom: 80px;
+  }
+
+  .case-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: box-shadow 0.25s, transform 0.25s;
+    display: flex;
+    flex-direction: column;
+  }
+  .case-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    transform: translateY(-3px);
+  }
+
+  .card-banner {
+    height: 6px;
+  }
+
+  .card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+
+  .card-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #f0f4ff;
+    color: #0d6efd;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+  }
+  .card-category .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #0d6efd;
+  }
+
+  .card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0a2540;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .card-client {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 16px;
+  }
+  .card-desc {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    flex: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .tag {
+    background: #f5f7fa;
+    color: #555;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid #e8ecf0;
+  }
+
+  .card-metrics {
+    display: flex;
+    gap: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #f0f2f5;
+  }
+  .metric { flex: 1; }
+  .metric-val {
+    font-size: 22px;
+    font-weight: 700;
+    color: #0a2540;
+    display: block;
+  }
+  .metric-label {
+    font-size: 12px;
+    color: #999;
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* Featured case */
+  .featured-case {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 80px;
+  }
+  .featured-left {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff3cd;
+    color: #856404;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    width: fit-content;
+  }
+  .featured-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0a2540;
+    margin-bottom: 16px;
+    line-height: 1.35;
+  }
+  .featured-desc {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+  .featured-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .featured-metric {
+    background: #f5f7fa;
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+  .featured-metric .val {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0d6efd;
+    display: block;
+  }
+  .featured-metric .lbl {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+    display: block;
+  }
+  .featured-right {
+    background: linear-gradient(135deg, #0a2540 0%, #1a4080 100%);
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+  }
+  .featured-right .icon-wrap {
+    width: 56px; height: 56px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+  .challenge-list { list-style: none; }
+  .challenge-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 14px;
+    opacity: 0.85;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.6;
+  }
+  .challenge-list li::before {
+    content: '✓';
+    color: #4ade80;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Quote section */
+  .quote-section {
+    background: linear-gradient(135deg, #0a2540, #1a4080);
+    border-radius: 16px;
+    padding: 60px;
+    text-align: center;
+    color: white;
+    margin-bottom: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .quote-mark {
+    font-size: 80px;
+    line-height: 1;
+    opacity: 0.15;
+    font-family: Georgia, serif;
+    position: absolute;
+    top: 20px;
+    left: 40px;
+  }
+  .quote-text {
+    font-size: 20px;
+    line-height: 1.8;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .quote-author {
+    font-size: 14px;
+    opacity: 0.6;
+  }
+
+  /* CTA */
+  .cta-section {
+    text-align: center;
+    padding: 60px 40px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .cta-section h2 { font-size: 26px; font-weight: 700; color: #0a2540; margin-bottom: 12px; }
+  .cta-section p { color: #666; margin-bottom: 28px; font-size: 15px; }
+  .cta-btn {
+    display: inline-block;
+    background: #0d6efd;
+    color: white;
+    padding: 14px 36px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0 8px;
+  }
+  .cta-btn.outline {
+    background: transparent;
+    border: 2px solid #0d6efd;
+    color: #0d6efd;
+  }
+
+  /* Footer */
+  .footer {
+    background: #0a2540;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 30px;
+    font-size: 13px;
+    margin-top: 0;
+  }
+
+  /* Color accents per card */
+  .accent-blue { background: linear-gradient(90deg, #0d6efd, #6ea8fe); }
+  .accent-green { background: linear-gradient(90deg, #198754, #51cf66); }
+  .accent-purple { background: linear-gradient(90deg, #6f42c1, #a78bfa); }
+  .accent-orange { background: linear-gradient(90deg, #fd7e14, #ffc107); }
+  .accent-teal { background: linear-gradient(90deg, #0dcaf0, #20c997); }
+  .accent-red { background: linear-gradient(90deg, #dc3545, #f87171); }
+  .accent-indigo { background: linear-gradient(90deg, #4361ee, #7048e8); }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-inner">
+    <div class="company-tag">客户案例</div>
+    <h1>技术赋能，驱动业务增长</h1>
+    <p>我们为各行业客户提供专业的技术解决方案，助力数字化转型与业务创新</p>
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-num">50+</span>
+        <span class="stat-label">服务客户</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">7</span>
+        <span class="stat-label">核心业务方向</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">98%</span>
+        <span class="stat-label">客户满意度</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">5年+</span>
+        <span class="stat-label">行业经验</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter bar -->
+<div class="filter-bar">
+  <div class="filter-btn active">全部案例</div>
+  <div class="filter-btn">AI 应用</div>
+  <div class="filter-btn">数据与自动化</div>
+  <div class="filter-btn">企业系统</div>
+  <div class="filter-btn">网络安全</div>
+  <div class="filter-btn">电商出海</div>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+
+  <!-- Featured Case: AI录音笔 -->
+  <div class="section-title">精选案例</div>
+  <div class="section-heading">标杆项目深度解析</div>
+
+  <div class="featured-case">
+    <div class="featured-left">
+      <div class="featured-badge">⭐ 精选案例</div>
+      <div class="featured-title">AI 智能录音笔<br>全链路语音解决方案</div>
+      <div class="featured-desc">
+        针对会议记录、访谈录制、培训存档等高频场景，我们为客户打造集实时转写、语音识别、AI摘要、多语言支持于一体的智能录音产品，大幅提升信息处理效率。
+      </div>
+      <div class="featured-metrics">
+        <div class="featured-metric">
+          <span class="val">97.3%</span>
+          <span class="lbl">语音识别准确率</span>
+        </div>
+        <div class="featured-metric">
+          <span class="val">3x</span>
+          <span class="lbl">会议整理效率提升</span>
+        </div>
+        <div class="featured-metric">
+          <span class="val">&lt;2s</span>
+          <span class="lbl">实时转写延迟</span>
+        </div>
+        <div class="featured-metric">
+          <span class="val">8+</span>
+          <span class="lbl">支持语种</span>
+        </div>
+      </div>
+    </div>
+    <div class="featured-right">
+      <div>
+        <div class="icon-wrap">🎙️</div>
+        <div style="font-size:18px;font-weight:700;margin-bottom:16px;">核心能力交付</div>
+        <ul class="challenge-list">
+          <li>基于 Whisper + 自研模型的高精度语音识别引擎</li>
+          <li>大语言模型驱动的自动摘要与关键词提取</li>
+          <li>多端同步（iOS / Android / Web）实时转写</li>
+          <li>说话人分离，支持多人会议场景</li>
+          <li>数据端到端加密，企业级隐私保障</li>
+          <li>导出 Word / PDF / 字幕文件，无缝对接工作流</li>
+        </ul>
+      </div>
+      <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.1);font-size:13px;opacity:0.6;">
+        技术栈：Python · Whisper · GPT-4 · FastAPI · React Native
+      </div>
+    </div>
+  </div>
+
+  <!-- Cases Grid -->
+  <div class="section-title">全部案例</div>
+  <div class="section-heading">多行业技术实践</div>
+
+  <div class="cases-grid">
+
+    <!-- Easy爬虫 -->
+    <div class="case-card">
+      <div class="card-banner accent-green"></div>
+      <div class="card-body">
+        <div class="card-category"><span class="dot"></span>数据采集</div>
+        <div class="card-title">Easy 爬虫平台</div>
+        <div class="card-client">适用行业：数据服务 / 市场研究 / 电商选品</div>
+        <div class="card-desc">
+          为客户构建可视化、低代码的数据采集平台。支持无需编程配置爬取规则，内置反反爬策略（IP轮换、浏览器指纹伪装、验证码识别），并提供结构化数据清洗与导出能力，帮助业务团队自主获取市场数据。
+        </div>
+        <div class="card-tags">
+          <span class="tag">低代码配置</span>
+          <span class="tag">IP代理池</span>
+          <span class="tag">数据清洗</span>
+          <span class="tag">定时调度</span>
+          <span class="tag">API导出</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric">
+            <span class="metric-val">10万+</span>
+            <span class="metric-label">日均采集条目</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">99%</span>
+            <span class="metric-label">任务成功率</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">0</span>
+            <span class="metric-label">封禁事件</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 自动化巡检报告 -->
+    <div class="case-card">
+      <div class="card-banner accent-purple"></div>
+      <div class="card-body">
+        <div class="card-category"><span class="dot" style="background:#6f42c1"></span>运维自动化</div>
+        <div class="card-title">自动化巡检报告系统</div>
+        <div class="card-client">适用行业：IT运维 / 工业制造 / 政务机房</div>
+        <div class="card-desc">
+          替代传统人工巡检，系统自动采集服务器、网络设备、业务系统的健康状态，结合预设阈值与AI异常分析，自动生成图文并茂的巡检报告，并通过企业微信 / 邮件定时推送责任人。
+        </div>
+        <div class="card-tags">
+          <span class="tag">SNMP/SSH采集</span>
+          <span class="tag">异常告警</span>
+          <span class="tag">PDF报告</span>
+          <span class="tag">定时推送</span>
+          <span class="tag">趋势分析</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric">
+            <span class="metric-val">80%</span>
+            <span class="metric-label">人工成本节省</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">5min</span>
+            <span class="metric-label">故障平均发现时间</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">24/7</span>
+            <span class="metric-label">持续监控</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 物流小程序 -->
+    <div class="case-card">
+      <div class="card-banner accent-orange"></div>
+      <div class="card-body">
+        <div class="card-category"><span class="dot" style="background:#fd7e14"></span>移动应用</div>
+        <div class="card-title">物流全程追踪小程序</div>
+        <div class="card-client">适用行业：物流 / 供应链 / 零售</div>
+        <div class="card-desc">
+          为物流企业定制微信小程序，实现货物从揽收到签收的全程可视化追踪。集成多家快递公司API，支持扫码操作、电子签名、异常上报，并为商家端提供数据看板与 SLA 分析。
+        </div>
+        <div class="card-tags">
+          <span class="tag">微信小程序</span>
+          <span class="tag">多接口聚合</span>
+          <span class="tag">扫码作业</span>
+          <span class="tag">电子签名</span>
+          <span class="tag">数据看板</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric">
+            <span class="metric-val">20+</span>
+            <span class="metric-label">对接物流服务商</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">60%</span>
+            <span class="metric-label">客户查询电话减少</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">5000+</span>
+            <span class="metric-label">日活用户</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 官方网站 -->
+    <div class="case-card">
+      <div class="card-banner accent-teal"></div>
+      <div class="card-body">
+        <div class="card-category"><span class="dot" style="background:#0dcaf0"></span>品牌建设</div>
+        <div class="card-title">企业官方网站建设</div>
+        <div class="card-client">适用行业：各类中小企业 / 品牌出海</div>
+        <div class="card-desc">
+          为客户提供从品牌策划、UI/UX设计到全栈开发、SEO优化的一站式官网建设服务。支持中英双语、响应式设计，并集成在线客服、表单收集、统计分析等业务功能，帮助企业快速建立专业形象。
+        </div>
+        <div class="card-tags">
+          <span class="tag">响应式设计</span>
+          <span class="tag">中英双语</span>
+          <span class="tag">SEO优化</span>
+          <span class="tag">CMS管理</span>
+          <span class="tag">快速交付</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric">
+            <span class="metric-val">30+</span>
+            <span class="metric-label">交付网站</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">2周</span>
+            <span class="metric-label">平均交付周期</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">Top10</span>
+            <span class="metric-label">搜索排名提升</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 远程办公VPN -->
+    <div class="case-card">
+      <div class="card-banner accent-indigo"></div>
+      <div class="card-body">
+        <div class="card-category"><span class="dot" style="background:#4361ee"></span>网络安全</div>
+        <div class="card-title">企业远程办公 VPN 方案</div>
+        <div class="card-client">适用行业：科技 / 金融 / 跨国团队</div>
+        <div class="card-desc">
+          为企业搭建安全、稳定的远程办公接入体系。基于 WireGuard / OpenVPN 实现零信任网络访问，支持多分支、多设备统一管理，结合双因素认证与访问日志审计，保障内网资源安全可控。
+        </div>
+        <div class="card-tags">
+          <span class="tag">WireGuard</span>
+          <span class="tag">零信任架构</span>
+          <span class="tag">2FA认证</span>
+          <span class="tag">访问审计</span>
+          <span class="tag">多端兼容</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric">
+            <span class="metric-val">500+</span>
+            <span class="metric-label">企业用户接入</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">99.9%</span>
+            <span class="metric-label">服务可用性</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">0</span>
+            <span class="metric-label">安全事件</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 亚马逊纯净IP -->
+    <div class="case-card">
+      <div class="card-banner accent-red"></div>
+      <div class="card-body">
+        <div class="card-category"><span class="dot" style="background:#dc3545"></span>电商出海</div>
+        <div class="card-title">亚马逊纯净 IP 解决方案</div>
+        <div class="card-client">适用行业：跨境电商 / 亚马逊卖家</div>
+        <div class="card-desc">
+          为亚马逊卖家提供独立、纯净的住宅 IP 资源，解决多账号关联、封号风险等痛点。每个账号配置独立 IP + 独立浏览器指纹 + 独立环境，配合操作规范培训，帮助卖家安全运营多个店铺。
+        </div>
+        <div class="card-tags">
+          <span class="tag">住宅IP</span>
+          <span class="tag">账号隔离</span>
+          <span class="tag">指纹浏览器</span>
+          <span class="tag">多账号管理</span>
+          <span class="tag">防关联</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric">
+            <span class="metric-val">200+</span>
+            <span class="metric-label">服务卖家账号</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">0%</span>
+            <span class="metric-label">关联封号率</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">3x</span>
+            <span class="metric-label">店铺规模扩展</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 自媒体多端同步 -->
+    <div class="case-card">
+      <div class="card-banner accent-purple"></div>
+      <div class="card-body">
+        <div class="card-category"><span class="dot" style="background:#6f42c1"></span>内容运营</div>
+        <div class="card-title">自媒体多端同步发布工作流</div>
+        <div class="card-client">适用行业：自媒体 / 品牌营销 / 内容电商</div>
+        <div class="card-desc">
+          一键将图文内容自动分发至微信公众号、小红书、抖音、知乎、微博等主流平台。系统自动适配各平台字数、图片比例、话题标签等格式差异，支持定时发布与发布状态监控，让内容团队从重复操作中彻底解放。
+        </div>
+        <div class="card-tags">
+          <span class="tag">多平台分发</span>
+          <span class="tag">格式自适应</span>
+          <span class="tag">定时发布</span>
+          <span class="tag">状态监控</span>
+          <span class="tag">内容复用</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric">
+            <span class="metric-val">8+</span>
+            <span class="metric-label">对接内容平台</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">90%</span>
+            <span class="metric-label">运营时间节省</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">3x</span>
+            <span class="metric-label">发布频次提升</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 短视频AI工作流 -->
+    <div class="case-card">
+      <div class="card-banner accent-orange"></div>
+      <div class="card-body">
+        <div class="card-category"><span class="dot" style="background:#fd7e14"></span>AIGC 创作</div>
+        <div class="card-title">短视频 AI 生成工作流平台</div>
+        <div class="card-client">适用行业：短视频 / 广告创意 / 教育培训</div>
+        <div class="card-desc">
+          在网站上输入一段提示词，系统自动调用 AI 模型生成视频、配音、背景音乐或配图，并合成为可直接发布的成品。支持文生视频、图生视频、AI 配音、一键换背景等功能，无需任何剪辑经验，分钟级出片。
+        </div>
+        <div class="card-tags">
+          <span class="tag">文生视频</span>
+          <span class="tag">AI配音</span>
+          <span class="tag">图片生成</span>
+          <span class="tag">音乐合成</span>
+          <span class="tag">一键成片</span>
+        </div>
+        <div class="card-metrics">
+          <div class="metric">
+            <span class="metric-val">&lt;3min</span>
+            <span class="metric-label">平均出片时间</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">5+</span>
+            <span class="metric-label">对接AI模型</span>
+          </div>
+          <div class="metric">
+            <span class="metric-val">95%</span>
+            <span class="metric-label">用户满意度</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Quote -->
+  <div class="quote-section">
+    <div class="quote-mark">"</div>
+    <div class="quote-text">
+      他们不只是交付了代码，而是真正理解了我们的业务需求，并用技术帮我们解决了核心问题。项目上线后效果超出预期，后续维护响应也非常及时。
+    </div>
+    <div class="quote-author">—— 某物流科技公司 CTO</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>准备开始您的项目？</h2>
+    <p>我们期待了解您的业务需求，为您提供专属技术方案与报价评估</p>
+    <a href="#" class="cta-btn">立即咨询</a>
+    <a href="#" class="cta-btn outline">查看更多案例</a>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>© 2025 · 保密文件，仅供客户资质评估使用</p>
+</div>
+
+</body>
+</html>
