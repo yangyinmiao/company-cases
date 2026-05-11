@@ -22,7 +22,7 @@ const FEATURED = {
   metrics: [
     { val: '97.3%', lbl: '语音识别准确率' },
     { val: '3x',    lbl: '会议整理效率提升' },
-    { lbl: '异步转写' },
+    { val: '批量', lbl: '异步转写' },
     { val: '中英日',    lbl: '支持语种' },
   ],
   icon: '🎙️',
